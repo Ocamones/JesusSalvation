@@ -1,0 +1,85 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}Store{% endblock %}
+
+{% block content %}
+
+
+
+
+<!-- ================= INTRO ================= -->
+<section class="py-4 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+
+            <h4>JesusSalvation — YOUR FAITH IS UNBREAKABLE</h4>
+
+            <p class="lead text-muted mt-3">
+                Browse our extensive collection of unique items.
+            </p>
+
+            <a href="{% url 'register' %}" class="btn btn-primary my-2">
+                <i class="fa fa-user-plus"></i> Create an account
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+<div class="container-fluid py-5 bg-light">
+    <div class="container">
+
+        <h1 >
+            Best Prices We Offer
+        </h1>
+
+        <div class="row">
+
+            {% for product in my_products %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+
+                <div class="product-item d-flex flex-column align-items-center text-center bg-white rounded py-4 px-3 shadow-sm">
+
+                    <div class="bg-primary py-2 px-3 rounded mb-3">
+                        <h5 class="text-white mb-0">$ {{ product.price }}</h5>
+                    </div>
+
+                    <div class="rounded-circle overflow-hidden mb-3"
+                         style="width:150px;height:150px;">
+                        <img src="{{ product.image.url }}"
+                             class="w-100 h-100"
+                             style="object-fit:cover;">
+                    </div>
+
+                    <h5 class="font-weight-bold mb-3">
+                        {{ product.title|capfirst }}
+                    </h5>
+
+                    <a href="{{ product.get_absolute_url }}"
+                       class="btn btn-sm btn-secondary">
+                        Order Now
+                    </a>
+
+                </div>
+
+            </div>
+            {% empty %}
+            <p>No products available.</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<!-- ================= PROMOTION ================= -->
+<div class="container-fluid my-5 py-5 bg-primary">
+    <div class="container text-center text-white">
+        <h2 class="mb-3">Limited Offer</h2>
+        <p class="mb-4">High quality products, delivered to your door.</p>
+        <a href="#" class="btn btn-secondary px-5 py-3">Shop Now</a>
+    </div>
+</div>
+
+{% endblock %}
