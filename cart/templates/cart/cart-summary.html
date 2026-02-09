@@ -67,23 +67,15 @@
 
                   &nbsp; 
                   
-                  <select id="select{{product.id}}">
-                  
-                    <option selected>
-                  
-                        {{item.qty}}
-                  
-                    </option>
-                  
-                    <option value="">1</option>
-                  
-                    <option value="">2</option>
-                  
-                    <option value="">3</option>
-                  
-                    <option value="">4</option>
-                  
-                  </select>
+                 <input
+    type="number"
+    id="quantity{{product.id}}"
+    value="{{item.qty}}"
+    min="1"
+    step="1"
+    class="form-control form-control-sm"
+    style="width: 80px;"
+>
                   
                   <br> <br>
 
@@ -200,7 +192,7 @@
         data: {
 
             product_id: $(this).data('index'),
-            product_quantity: $('#select' + theproductid + ' option:selected').text(),
+            product_quantity: $('#quantity' + theproductid).val(),
             csrfmiddlewaretoken: "{{csrf_token}}",
             action: 'post'
 

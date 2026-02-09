@@ -16,25 +16,26 @@ def cart_summary(request):
 
 
 def cart_add(request):
-
     cart = Cart(request)
 
     if request.POST.get('action') == 'post':
+        product_id = request.POST.get('product_id')
+        product_qty = request.POST.get('product_quantity', 1)
 
-        product_id = int(request.POST.get('product_id'))
-        product_quantity = int(request.POST.get('product_quantity'))
+        try:
+            product_id = int(product_id)
+            product_qty = int(product_qty)
+        except (TypeError, ValueError):
+            return JsonResponse({'error': 'Invalid data'}, status=400)
+
+        if product_qty < 1:
+            product_qty = 1
 
         product = get_object_or_404(Product, id=product_id)
 
-        cart.add(product=product, product_qty=product_quantity)
+        cart.add(product=product, product_qty=product_qty)
 
-
-        cart_quantity = cart.__len__()
-
-
-        response = JsonResponse({'qty': cart_quantity})
-
-        return response
+        return JsonResponse({'qty': cart.__len__()})
         
 
 
