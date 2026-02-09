@@ -1,4 +1,4 @@
-pip==26.0.1
+
 asgiref==3.7.2
 boto3==1.25.5
 botocore==1.28.5
@@ -22,6 +22,7 @@ tzdata==2022.5
 urllib3==1.26.12
 dj-database-url
 whitenoise>=6.4.0
+
 
 
 
